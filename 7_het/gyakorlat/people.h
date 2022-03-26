@@ -21,13 +21,13 @@ class Customer{
 };
 
 std::ostream& operator<<(std::ostream& os, const Customer& c) {
-  return os << "Customer with ID: " << &c << std::endl;
+  return os << "Customer with ID: " << &c << std::endl; // was lazy to implement ID Customers, so using Customer object's mem address OMEGALUL
 }
 
 class Teller {
-  std::deque<Customer>& customers;
-  std::deque<Customer*> servedCustomers;
-  bool isCurrentlyBusy;
+  std::deque<Customer>& customers; // all customers
+  std::deque<Customer*> servedCustomers; // customers that already being served
+  bool isCurrentlyBusy; // status of Teller, true if working, false if not working
   public:
   Teller(std::deque<Customer>& c) : customers(c), isCurrentlyBusy(false) {}
   bool isBusy() const {
