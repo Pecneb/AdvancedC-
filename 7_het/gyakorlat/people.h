@@ -18,27 +18,30 @@ class Customer{
   void setComplexity(std::chrono::seconds c) { taskComplexity = c; }
   void stopServing() { isCurrentlyWaiting = true; }
   friend std::ostream& operator<<(std::ostream&, const Customer&);
-}
+};
 
-std::ostream::ostream& operator<<(std::ostream& os, const Customer& c) {
+std::ostream& operator<<(std::ostream& os, const Customer& c) {
   return os << "Placeholder for customer output!\n";
 }
 
 class Teller {
   std::deque<Customer>& customers;
-  std::vector<Customer&> servedCustomers;
+  std::deque<Customer*> servedCustomers;
   bool isCurrentlyBusy;
   public:
   Teller(std::deque<Customer>& c) : customers(c), isCurrentlyBusy(false) {}
   bool isBusy() const {
     return isCurrentlyBusy;
   }
-  void printServicedCustomers() {
-   for ( auto& sc : servedCustomers ) {
-     std::cout << "Customer " << sc << std::endl;
+  void startedWorking() { isCurrentlyBusy = true; }
+  void stoppedWorking() { isCurrentlyBusy = false; }
+  void printServicedCustomers() const {
+   for ( auto it = servedCustomers.cbegin(); it != servedCustomers.cend(); it++ ) {
+     std::cout << "Customer " << *it << std::endl;
    }
   }
   void run() {
+    startedWorking();
     int timeAvailable = 5;
     while (timeAvailable > 0) {
       for (int i = 0; i < customers.size(); i++) {
@@ -49,7 +52,7 @@ class Teller {
           if (timeAvailable > rtfc) {
             cus.setToDone();
             timeAvailable -= rtfc;
-            servedCustomers.push_back(cus);
+            servedCustomers.push_back(&cus);
           } else {
             cus.setComplexity(std::chrono::seconds(rtfc - timeAvailable));
             cus.stopServing();
@@ -59,6 +62,7 @@ class Teller {
       }
       if (timeAvailable != 0) timeAvailable -= 1;
     }
+    stoppedWorking();
   }
 };
 
