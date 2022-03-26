@@ -21,7 +21,7 @@ class Customer{
 };
 
 std::ostream& operator<<(std::ostream& os, const Customer& c) {
-  return os << "Placeholder for customer output!\n";
+  return os << "Customer with ID: " << &c << std::endl;
 }
 
 class Teller {
@@ -40,29 +40,30 @@ class Teller {
      std::cout << "Customer " << *it << std::endl;
    }
   }
-  void run() {
-    startedWorking();
-    int timeAvailable = 5;
+  void run() { // teller start to serve customers
+    startedWorking(); // teller status set to working
+    int timeAvailable = 5; // time frame available to teller for serving
     while (timeAvailable > 0) {
-      for (int i = 0; i < customers.size(); i++) {
-        Customer& cus = customers[i];
-        if (cus.isWaiting()) {
-          cus.startServing(); 
-          int rtfc = cus.getTaskComplexity().count();
+      for ( auto cus = customers.begin(); cus != customers.end(); cus++ ) {
+        if ((*cus).isWaiting()) { // if theres customers waiting start serving them
+          (*cus).startServing(); 
+          servedCustomers.push_back(&(*cus)); // add customer to the deque of served customers
+          int rtfc = (*cus).getTaskComplexity().count();
           if (timeAvailable > rtfc) {
-            cus.setToDone();
-            timeAvailable -= rtfc;
-            servedCustomers.push_back(&cus);
+            (*cus).setToDone(); // if teller got more time, than customer's time then customer can be served completely, set status of customer to DONE
+            timeAvailable -= rtfc; // subtract customer's time from teller's available time to serve
+            customers.erase(cus); // erase customer from waiting customer's deque
+            servedCustomers.erase(std::find(servedCustomers.begin(), servedCustomers.end(), &(*cus)));
           } else {
-            cus.setComplexity(std::chrono::seconds(rtfc - timeAvailable));
-            cus.stopServing();
+            (*cus).setComplexity(std::chrono::seconds(rtfc - timeAvailable)); // if teller's time is not enough to serve the customer, then just sub the available time from customer's serving time
+            (*cus).stopServing(); // teller's service window is ended, stop serving customer, (we'll get them next time boys)
             timeAvailable = 0;
           }
         }
       }
-      if (timeAvailable != 0) timeAvailable -= 1;
+      timeAvailable -= 1; // if there is no customer, teller's serving time should end sometime, so we must subtract from timeAvailable
     }
-    stoppedWorking();
+    stoppedWorking(); // teller status isBusy set to false, (not working atm)
   }
 };
 
