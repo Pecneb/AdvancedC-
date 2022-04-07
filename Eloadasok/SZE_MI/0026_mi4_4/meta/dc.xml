@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simpledc 
+ xmlns:dc="http://purl.org/dc/elements/1.1/" 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:noNamespaceSchemaLocation="http://dublincore.org/schemas/xmls/qdc/2003/04/02/simpledc.xsd">
+
+ <dc:title>Mesterséges intelligencia</dc:title>
+ 
+ <dc:creator>Stuart Russell</dc:creator>
+ <dc:creator>Peter Norvig</dc:creator>
+
+ <dc:publisher>Panem Kft.</dc:publisher>
+ <dc:contributor></dc:contributor>
+ <dc:date>2005</dc:date>
+ <dc:type>Text</dc:type>
+ <dc:format>text/xml</dc:format>
+ <dc:identifier>http://www.panem.hu</dc:identifier>
+ <dc:source>ISBN 963 545 411 2</dc:source>
+ <dc:language>hu</dc:language>
+ <dc:relation></dc:relation>
+ <dc:coverage>2005, Magyarország</dc:coverage>
+ <dc:rights>Hungarian Translation Panem Könyvkiadó, Budapest</dc:rights>
+
+</simpledc>

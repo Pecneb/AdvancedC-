@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection 
+ xmlns="http://www.loc.gov/MARC21/slim" 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+
+  <record> 
+	<leader>00364nmm  220024100 4500</leader>
+	
+	<controlfield tag="001">HIK00115848</controlfield>
+	<controlfield tag="005">20040218164232.0</controlfield>
+	<controlfield tag="008">040218s2004 hu n ua hun d</controlfield>
+
+	 <datafield tag="020" ind1=" " ind2=" ">
+	 	<subfield code="a">ISBN 963 545 411 2</subfield>
+	 </datafield>
+
+	 <datafield tag="041" ind1=" " ind2=" ">
+		<subfield code="a">hun</subfield>
+	 </datafield>
+
+	 <datafield tag="044" ind1=" " ind2=" ">
+		<subfield code="a">HU</subfield>
+	 </datafield>
+
+	 <datafield tag="100" ind1="1" ind2=" ">
+	 	<subfield code="a">Stuart Russell</subfield>
+	 	<subfield code="a">Peter Norvig</subfield>
+	 </datafield>
+
+	 <datafield tag="245" ind1="1" ind2="0">
+	 	<subfield code="a">Mesterséges intelligencia</subfield>
+	 </datafield>
+
+	 <datafield tag="260" ind1="1" ind2=" ">
+		<subfield code="a">Budapest</subfield>
+		<subfield code="b">Panem Kft.</subfield>
+		<subfield code="c">2005</subfield>
+	 </datafield>
+
+	 <datafield tag="538" ind1=" " ind2=" ">
+		<subfield code="a">http.//www.panem.hu</subfield>
+	 </datafield>
+
+	 <datafield tag="700" ind1="1" ind2=" ">
+		<subfield code="a"/>
+		<subfield code="d"/>
+		<subfield code="c"/>
+		<subfield code="4"/>
+	 </datafield>
+
+  </record>
+ </collection>
