@@ -6,7 +6,7 @@
 #include <deque>
 #include <list>
 #include <algorithm>
-
+#include <thread>
 #include <stdlib.h> // srand, rand miatt
 
 #include "people.h"
@@ -17,6 +17,12 @@ void initialize_random_seed(){
 			std::chrono::system_clock::now()
 		)
 	); // rand() random generator seed-je mindig mas lesz
+}
+
+void printCustomers(const std::deque<Customer>& cus) {
+	for (const auto& cu : cus) {
+		std::cout << "\t\t" << cu << std::endl;
+	}
 }
 
 void printCustomers(const std::list<Teller>& tels, const std::deque<Customer>& cus) {
@@ -48,11 +54,14 @@ int main()
 		}
 		std::cout << '{' << tellers.size() << " tellers}" << std::endl;
 		std::cout << "\tCustomers to service:" << std::endl;
-		printCustomers(tellers, customers);
+		printCustomers(customers);
+
+		std::deque<std::thread*> ttr;
 
 		// A kiszolgalok most 5 masodpercig kiszolgaljak az ugyfeleket
-		for (TellIt i = tellers.begin(); i != tellers.end(); i++)
+		for (TellIt i = tellers.begin(); i != tellers.end(); i++) {
 			(*i).run();
+		}
 
 		std::cout << "\tCustomers remaining:" << std::endl;
 		printCustomers(tellers, customers);
@@ -72,13 +81,12 @@ int main()
 		}
 
 		if (
-			customers.empty() &&
+			customers.empty() /* &&
 			std::find_if(
 				tellers.begin(),
 				tellers.end(),
-				[](const Teller& t) -> bool { return t.isBusy(); }) == tellers.cend()) {
-				break;
-		}
+				[](const Teller& t) -> bool { return t.isBusy(); }) == tellers.cend() */
+			) { break; }
 
 		std::cin.get();
 	}
