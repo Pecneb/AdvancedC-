@@ -21,7 +21,7 @@ decltype(auto) swapTime(function_ptr func, obj1& o1, obj1& o2) {
 
     high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
-    duration<double> time_span = duration_cast<duration<double>>(t2-t1);
+    duration<double, seconds> time_span = duration_cast<duration<double, seconds>>(t2-t1);
 
     cout << "Exection time of function was: " << time_span.count() << '\n';
 
