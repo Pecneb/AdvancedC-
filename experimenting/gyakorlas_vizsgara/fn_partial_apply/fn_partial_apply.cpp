@@ -29,6 +29,32 @@ public:
   }
 };
 
+class Operations_manager {
+
+  private:
+  
+    int count = 0;
+
+  public:
+  
+    int add( int a, int b ) {
+    
+      count++;
+      
+      cout << "Computing " << a << " + " << b << '\n';
+      
+      return a+b;
+    
+    }
+
+    void printStatus() {
+
+      cout << "Operations called: " << count << '\n';
+    
+    }
+
+};
+
 int main() {
 
   partial_apply_2nd< function< int( int, int ) >, int > somethingPlus5( 
@@ -52,6 +78,12 @@ int main() {
 
   cout << "This is 1000 x 1000 = " << thousandTimesSomething(1000) << '\n'; 
  
+  Operations_manager opm;
+
+  auto addTo3 = bind( &Operations_manager::add, placeholders::_1, placeholders::_2, 3 );
+
+  cout << addTo3( opm, 5 ) << '\n';
+
   return 0;
 
 }
