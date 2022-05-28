@@ -36,6 +36,12 @@ int main() {
   
   cout << somethingPlus5( 10 ) << '\n';
 
+  partial_apply_2nd< function< bool( int, int ) >, int > greaterThan18( greater< int >(), 18 );
+
+  cout << "19 is greater than 18? " << ( greaterThan18( 19 ) ? "Yes" : "No" ) << '\n';
+
+  cout << "17 is greater than 18? " << ( greaterThan18( 17 ) ? "Yes" : "No" ) << '\n';
+
   return 0;
 
 }
