@@ -1,0 +1,5 @@
+std::function< returntype ( argtype ) >(argtype arg)
+std::move()
+std::forward< argtype > (argtype arg)
+std::bind< functiontype, argtype >( functiontype function, argtype arg )
+std::placeholders::_1 <- this is the place of the argument
